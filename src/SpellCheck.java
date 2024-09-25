@@ -7,6 +7,7 @@
  * Completed by: [YOUR NAME HERE]
  * */
 
+import java.util.Stack;
 public class SpellCheck {
 
 
@@ -18,6 +19,17 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
+        Stack<String> parents = new Stack<>();
+
+        Word[] roots = new Word[27];
+
+        for(int word = 0; word < dictionary.length; word++){
+            for(int letter = 0; letter < dictionary[word].length(); letter++){
+                if[roots[dicionary[word]]]
+            }
+        }
+
+
 
         return null;
     }

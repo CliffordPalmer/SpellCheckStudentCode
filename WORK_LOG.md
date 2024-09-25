@@ -1,9 +1,11 @@
 Name: YOUR NAME HERE
 
-| Date    |  Time  |                                     Update |
-|:--------|:------:|-------------------------------------------:|
-| April 5 | 9-10pm | I tried to write abstract, efficient code. |
-|         |        |                                            |
+| Date         |    Time     |                                                                                                                                                                                                                                                                                                         Update |
+|:-------------|:-----------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| April 5      |   9-10pm    |                                                                                                                                                                                                                                                                     I tried to write abstract, efficient code. |
+| September 25 | 1:50-2:30pm |                        Right now I'm thinking of approaching the problem by turning the entire dictionary into a tree, where the children of each node are words that are built off of the original word. I'm not really sure how to keep track of where to go back to when I've exhausted one lineage though. |
+| September 25 | 2:30-3:00pm | I spent a lot of time caught up on how to deal with single letter words. Then I talked to Mr. Blick and realized that I should just treat them like any other word, and if one of them doesn't exist, such as "b", just wait till i get something that starts with "b" and then make the path that includes b. |
+|              |             |                                                                                                                                                                                                                                                                                         
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
