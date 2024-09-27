@@ -4,6 +4,7 @@ public class Word {
     private Word[] children;
     private boolean isValid;
 
+
     public Word(String word){
         this.word = word;
         isValid = false;
@@ -11,7 +12,13 @@ public class Word {
     }
 
     private void setChild(Word child){
-        int index = child.getWord().charAt(word.length()-1) -'a';
+        int index;
+        if(child.getWord().charAt(word.length()-1) == 39){
+            index = 26;
+        }
+        else{
+            index = child.getWord().charAt(word.length()-1) -'a';
+        }
         children[index] = child;
     }
 

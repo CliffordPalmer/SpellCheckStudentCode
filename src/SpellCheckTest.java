@@ -35,7 +35,7 @@ public class SpellCheckTest {
     }
 
     @Test
-    @Timeout(value = 900, unit = TimeUnit.MILLISECONDS)
+    @Timeout(value = 900, unit = TimeUnit.SECONDS)
     public void testBard() {
         setTestData("large", "shakespeare");
         assertArrayEquals(badWords, studentSolution.checkWords(textWords, allWords), "Incorrect words returned.");

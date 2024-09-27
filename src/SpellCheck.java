@@ -25,39 +25,70 @@ public class SpellCheck {
         Word[] roots = new Word[27];
         Word[] current;
         for(int index = 0; index < dictionary.length; index++){
-            String word = dictionary[index];
+            System.out.println(index);
+            String word = dictionary[index].toLowerCase();
             current = roots;
             for(int letter = 0; letter < dictionary[index].length(); letter++){
-                int letterIndex = (int)(word.charAt(letter) - 'a');
+                int letterIndex;
+                if(word.charAt(letter) == 39){
+                    letterIndex = 26;
+                }
+                else{
+                    letterIndex = (int)(word.charAt(letter) - 'a');
+                }
                 if(current[letterIndex] == null){
                     current[letterIndex] = new Word(word.substring(0, letter + 1));
                     if(current[letterIndex].getWord().equals(word)){
                         current[letterIndex].setValid(true);
                     }
                 }
-                current = current[(int)(word.charAt(letter) - 'a')].getChildren();
+                current = current[letterIndex].getChildren();
             }
         }
 
         ArrayList<String> wrongWords = new ArrayList<>();
         current = roots;
         for(int i = 0; i < text.length; i++){
-            String word = text[i];
+            System.out.println(i);
+            String word = text[i].toLowerCase();
             current = roots;
             for(int j = 0; j < text[i].length(); j++){
-                int letterIndex = (int)(word.charAt(j) - 'a');
+                int letterIndex;
+                if(word.charAt(j) == 39){
+                    letterIndex = 26;
+                }
+                else{
+                    letterIndex = (int)(word.charAt(j) - 'a');
+                }
+                Boolean isAdded = false;
+                for(int x = 0; x < wrongWords.size(); x++){
+                    if(word.equals(wrongWords.get(x))){
+                        isAdded = true;
+                    }
+                }
+                if(!Character.isLetter(word.charAt(j)) && word.charAt(j) != 39){
+                    if(!isAdded) {
+                        wrongWords.add(word);
+                    }
+                    break;
+                }
                 if(current[letterIndex] == null){
-                    wrongWords.add(word);
+                    if(!isAdded) {
+                        wrongWords.add(word);
+                    }
                     break;
                 }
                 else if (j == text[i].length() - 1 && !current[letterIndex].isValid()) {
-                    wrongWords.add(word);
+                   if(!isAdded) {
+                       wrongWords.add(word);
+                   }
                     break;
                 }
                 else{
                     current = current[letterIndex].getChildren();
                 }
             }
+
         }
 
         String[] wrongWordsArr = new String[wrongWords.size()];
