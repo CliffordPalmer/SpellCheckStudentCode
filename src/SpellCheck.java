@@ -22,13 +22,24 @@ public class SpellCheck {
         Stack<String> parents = new Stack<>();
 
         Word[] roots = new Word[27];
-
-        for(int word = 0; word < dictionary.length; word++){
-            for(int letter = 0; letter < dictionary[word].length(); letter++){
-                if[roots[dicionary[word]]]
+        Word[] current = roots;
+        for(int index = 0; index < dictionary.length; index++){
+            String word = dictionary[index];
+            for(int letter = 0; letter < dictionary[index].length(); letter++){
+                int letterIndex = (int)(word.charAt(letter) - 'a');
+                if(current[letterIndex] == null){
+                    current[letterIndex] = new Word(word.substring(0, letter + 1));
+                    current[letterIndex].setValid(true);
+                }
+                current = current[(int)(word.charAt(letter) - 'a')].getChildren();
             }
         }
 
+        for(int i = 0; i < text.length; i++){
+            for(int j = 0; j < text[i].length(); j++){
+
+            }
+        }
 
 
         return null;
