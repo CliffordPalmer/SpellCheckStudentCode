@@ -1,4 +1,4 @@
-/**
+ /**
  * Spell Check
  * A puzzle written by Zach Blick
  * for Adventures in Algorithms
@@ -7,9 +7,6 @@
  * Completed by: [YOUR NAME HERE]
  * */
 
-import java.util.Stack;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 public class SpellCheck {
 
