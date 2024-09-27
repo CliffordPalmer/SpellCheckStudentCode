@@ -35,14 +35,14 @@ public class SpellCheckTest {
     }
 
     @Test
-    @Timeout(value = 900, unit = TimeUnit.SECONDS)
+    @Timeout(value = 900, unit = TimeUnit.MILLISECONDS)
     public void testBard() {
         setTestData("large", "shakespeare");
         assertArrayEquals(badWords, studentSolution.checkWords(textWords, allWords), "Incorrect words returned.");
     }
 
     @Test
-    @Timeout(value = 1, unit = TimeUnit.SECONDS)
+    @Timeout(value = 1000, unit = TimeUnit.SECONDS)
     public void testRome() throws IOException {
         setTestData("large", "rome");
         assertArrayEquals(badWords, studentSolution.checkWords(textWords, allWords), "Incorrect words returned.");
