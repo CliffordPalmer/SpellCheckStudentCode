@@ -8,6 +8,7 @@
  * */
 
 import java.util.Stack;
+import java.util.ArrayList;
 public class SpellCheck {
 
 
@@ -19,29 +20,51 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
-        Stack<String> parents = new Stack<>();
+
 
         Word[] roots = new Word[27];
-        Word[] current = roots;
+        Word[] current;
         for(int index = 0; index < dictionary.length; index++){
             String word = dictionary[index];
+            current = roots;
             for(int letter = 0; letter < dictionary[index].length(); letter++){
                 int letterIndex = (int)(word.charAt(letter) - 'a');
                 if(current[letterIndex] == null){
                     current[letterIndex] = new Word(word.substring(0, letter + 1));
-                    current[letterIndex].setValid(true);
+                    if(current[letterIndex].getWord().equals(word)){
+                        current[letterIndex].setValid(true);
+                    }
                 }
                 current = current[(int)(word.charAt(letter) - 'a')].getChildren();
             }
         }
 
+        ArrayList<String> wrongWords = new ArrayList<>();
+        current = roots;
         for(int i = 0; i < text.length; i++){
+            String word = text[i];
+            current = roots;
             for(int j = 0; j < text[i].length(); j++){
-
+                int letterIndex = (int)(word.charAt(j) - 'a');
+                if(current[letterIndex] == null){
+                    wrongWords.add(word);
+                    break;
+                }
+                else if (j == text[i].length() - 1 && !current[letterIndex].isValid()) {
+                    wrongWords.add(word);
+                    break;
+                }
+                else{
+                    current = current[letterIndex].getChildren();
+                }
             }
         }
 
-
-        return null;
+        String[] wrongWordsArr = new String[wrongWords.size()];
+        for(int i = 0; i < wrongWords.size(); i++){
+            wrongWordsArr[i] = wrongWords.get(i);
+        }
+        System.out.println("test");
+        return wrongWordsArr;
     }
 }
