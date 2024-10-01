@@ -1,4 +1,4 @@
- /**
+/**
  * Spell Check
  * A puzzle written by Zach Blick
  * for Adventures in Algorithms
@@ -7,6 +7,10 @@
  * Completed by: [YOUR NAME HERE]
  * */
 
+import java.lang.reflect.Array;
+import java.util.Stack;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 public class SpellCheck {
 
@@ -18,18 +22,22 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
-        LinkedHashSet<String> dict = new LinkedHashSet<>();
-        for(String word : dictionary) {
-            dict.add(word);
+
+        Trie dict = new Trie();
+        for(int index = 0; index < dictionary.length; index++) {
+            dict.insert(dictionary[index]);
         }
-        LinkedHashSet<String> isAdded = new LinkedHashSet<>();
-        for (String word : text) {
-            if (!dict.contains(word)) {
-                if (!isAdded.contains(word)) {
-                    isAdded.add(word);
-                }
+
+        Trie misspelledWords = new Trie();
+
+        ArrayList<String> toReturn= new ArrayList<>();
+
+        for(int index = 0; index < text.length; index++){
+            if(!dict.lookup(text[index]) && !misspelledWords.lookup(text[index])){
+                misspelledWords.insert(text[index]);
+                toReturn.add(text[index]);
             }
         }
-        return isAdded.toArray(new String[0]);
+        return toReturn.toArray(new String[0]);
     }
 }
