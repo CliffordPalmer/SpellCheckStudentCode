@@ -22,22 +22,27 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
-
-        Trie dict = new Trie();
+        TST dict = new TST();
         for(int index = 0; index < dictionary.length; index++) {
             dict.insert(dictionary[index]);
         }
-
-        Trie misspelledWords = new Trie();
-
-        ArrayList<String> toReturn= new ArrayList<>();
-
-        for(int index = 0; index < text.length; index++){
-            if(!dict.lookup(text[index]) && !misspelledWords.lookup(text[index])){
-                misspelledWords.insert(text[index]);
-                toReturn.add(text[index]);
-            }
-        }
-        return toReturn.toArray(new String[0]);
+        System.out.println("test");
+        return null;
+//        Trie dict = new Trie();
+//        for(int index = 0; index < dictionary.length; index++) {
+//            dict.insert(dictionary[index]);
+//        }
+//
+//        Trie misspelledWords = new Trie();
+//
+//        ArrayList<String> toReturn= new ArrayList<>();
+//
+//        for(int index = 0; index < text.length; index++){
+//            if(!dict.lookup(text[index]) && !misspelledWords.lookup(text[index])){
+//                misspelledWords.insert(text[index]);
+//                toReturn.add(text[index]);
+//            }
+//        }
+//        return toReturn.toArray(new String[0]);
     }
 }
