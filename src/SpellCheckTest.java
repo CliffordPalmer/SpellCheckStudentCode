@@ -14,7 +14,7 @@ public class SpellCheckTest {
     private String[] allWords, textWords, badWords;
 
     @Test
-    @Timeout(value = 100, unit = TimeUnit.SECONDS)
+    @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
     public void testSentence() {
         setTestData("small", "sentence");
         assertArrayEquals(badWords, studentSolution.checkWords(textWords, allWords), "Incorrect words returned.");

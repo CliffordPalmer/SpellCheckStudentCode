@@ -1,55 +1,83 @@
 public class TST {
+    // Instance variable to store the root node of the TST
     private TSTNode root;
 
-    public TST(){
-        root = new TSTNode('n');
-    }
-
+    // Helper function which calls the recursive function with necessary parameters.
     public void insert(String s){
-        TSTNode current = root;
-        for(int character = 0; character < s.length(); character++) {
-            if(current == null){
-
-            }
-            char currentLetter = current.getLetter();
-            char testLetter = s.charAt(character);
-            if(testLetter == currentLetter){
-                if(current.getMiddle() == null){
-                    current.addMiddle();
-                }
-            }
-
-//            while (current.getLetter() != s.charAt(character)) {
-//                if(s.charAt(character) < current.getLetter()){
-//                    current = current.getLeft();
-//                }
-//                else if(s.charAt(character) > current.getLetter()){
-//                    current = current.getLeft();
-//                }
-//                if(current == null){
-//                    current = new TSTNode(s.charAt(character));
-//                    break;
-//                }
-//            }
-//            if(current.getLetter() == s.charAt(character)){
-//                current = current.getMiddle();
-//                if(current == null){
-//                    current = new TSTNode(s.charAt(character));
-//                }
-//            }
+        if(root == null){
+            root = new TSTNode(s.charAt(0));
         }
-        current.setWord(true);
+        insert(s, root);
     }
 
-    public boolean lookup(String s){
-        TSTNode current = root;
-        for(int character = 0; character < s.length(); character++){
-
+    // Recursive function to insert a word into the TST
+    public void insert(String s, TSTNode current){
+        // Base case: if there is only one character left, and that character matches the current
+        // node, set the word to true and return
+        if(s.length() == 1 && current.getLetter() == s.charAt(0)){
+            current.setWord(true);
+            return;
         }
-        if(current.isWord()){
+
+        // Case for creating a middle child
+        if(current.getLetter() == s.charAt(0)){
+            // If the next node is null, create a new node with the first character
+            if(current.getMiddle() == null) {
+                current.addMiddle(s.charAt(1));
+            }
+            // Recurse but remove the first letter of the String, because the first letter
+            // was accepted
+            insert(s.substring(1), current.getMiddle());
+        }
+
+        // Case for creating a left child
+        else if(s.charAt(0) < current.getLetter()){
+            if(current.getLeft() == null){
+                current.addLeft(s.charAt(0));
+            }
+            // Recurse with the entire string, because the first letter didn't get accepted
+            insert(s, current.getLeft());
+        }
+
+        // Case for getting a right child
+        else if(s.charAt(0) > current.getLetter()){
+            if(current.getRight() == null){
+                current.addRight(s.charAt(0));
+            }
+            insert(s, current.getRight());
+        }
+
+    }
+
+    // Helper function which calls the recursive function with necessary parameters.
+    public boolean lookup(String s){
+        return lookup(s, root);
+    }
+
+    public boolean lookup(String s, TSTNode current) {
+        // Base cases:
+        // Return early if the String runs out or if running into a null node.
+        if(s.isEmpty() || current == null){
+            return false;
+        }
+        // If on the last letter, it matches the node, and the node is a valid word, return true
+        if(s.length() == 1 && s.charAt(0) == current.getLetter() && current.isWord()) {
             return true;
         }
-        return false;
-    }
 
+        // Case for moving to the middle child
+        if (current.getLetter() == s.charAt(0)) {
+            // Same as above
+            return lookup(s.substring(1), current.getMiddle());
+        }
+        // Case for moving to the left child
+        else if (s.charAt(0) < current.getLetter()) {
+            // Same as above
+            return lookup(s, current.getLeft());
+        }
+        // Case for moving to the right child
+        else {
+            return lookup(s, current.getRight());
+        }
+    }
 }

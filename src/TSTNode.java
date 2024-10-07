@@ -1,8 +1,10 @@
 public class TSTNode {
     private char letter;
+    // Children
     private TSTNode left;
     private TSTNode middle;
     private TSTNode right;
+    // Whether to node stores a valid word or not
     private boolean isWord;
 
     public TSTNode(char letter){
@@ -10,6 +12,7 @@ public class TSTNode {
         isWord = false;
     }
 
+    // Methods to add children
     public void addLeft(char letter){
         left = new TSTNode(letter);
     }
@@ -18,10 +21,6 @@ public class TSTNode {
     }
     public void addRight(char letter){
         right = new TSTNode(letter);
-    }
-
-    public boolean isWord() {
-        return isWord;
     }
 
     public void setWord(boolean word) {
@@ -42,5 +41,9 @@ public class TSTNode {
 
     public char getLetter() {
         return letter;
+    }
+
+    public boolean isWord() {
+        return isWord;
     }
 }

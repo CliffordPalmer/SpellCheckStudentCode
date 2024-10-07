@@ -7,11 +7,7 @@
  * Completed by: [YOUR NAME HERE]
  * */
 
-import java.lang.reflect.Array;
-import java.util.Stack;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 public class SpellCheck {
 
     /**
@@ -22,19 +18,45 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
+        /**
+         * TST code
+         * */
+
+        // Create new TST
         TST dict = new TST();
+
+        // Insert each word in the dictionary into the TST
         for(int index = 0; index < dictionary.length; index++) {
             dict.insert(dictionary[index]);
         }
-        System.out.println("test");
-        return null;
+
+        // Create a TST to store the misspelled words, and an ArrayList to track the order
+        // they are added
+        TST misspelledWords = new TST();
+        ArrayList<String> toReturn= new ArrayList<>();
+        // Traverse the text word by word
+        for(int index = 0; index < text.length; index++){
+            // If the word is misspelled, and hasn't been added before, record it
+            if(!dict.lookup(text[index]) && !misspelledWords.lookup(text[index])){
+                misspelledWords.insert(text[index]);
+                toReturn.add(text[index]);
+            }
+        }
+        // Return the list of misspelled words
+        return toReturn.toArray(new String[0]);
+
+        /**
+         * Trie code
+         * This next section works identically to the first, but uses a Trie instead of a TST
+         * */
+
 //        Trie dict = new Trie();
+//
 //        for(int index = 0; index < dictionary.length; index++) {
 //            dict.insert(dictionary[index]);
 //        }
 //
 //        Trie misspelledWords = new Trie();
-//
 //        ArrayList<String> toReturn= new ArrayList<>();
 //
 //        for(int index = 0; index < text.length; index++){
@@ -43,6 +65,7 @@ public class SpellCheck {
 //                toReturn.add(text[index]);
 //            }
 //        }
+//
 //        return toReturn.toArray(new String[0]);
     }
 }
